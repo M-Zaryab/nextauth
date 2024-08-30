@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios, { Axios } from "axios";
 import toast, { Toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const page = () => {
   const router = useRouter();
@@ -40,13 +41,15 @@ const page = () => {
   }, [user]);
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center p-2 ">
-      <h1>{loading ? "Processing" : "Signup"}</h1>
+    <main className="min-h-screen flex flex-col justify-center items-center p-2 ">
+      <h1 className="m-5 font-bold text-xl">
+        {loading ? "Processing" : "Signup"}
+      </h1>
       <label className="" htmlFor="username">
         Username
       </label>
       <input
-        className="rounded-lg px-2"
+        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
         id="username"
         placeholder="username"
         type="text"
@@ -60,7 +63,7 @@ const page = () => {
       </label>
       <input
         id="email"
-        className="rounded-lg px-2"
+        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
         placeholder="email"
         type="text"
         value={user.email}
@@ -73,7 +76,7 @@ const page = () => {
       </label>
       <input
         id="password"
-        className="rounded-lg px-2"
+        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
         placeholder="password"
         type="text"
         value={user.password}
@@ -81,7 +84,17 @@ const page = () => {
           setUser({ ...user, password: e.target.value });
         }}
       />
-    </div>
+
+      <button
+        onClick={onSignUp}
+        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
+      >
+        {buttonDisabled ? "No Signup" : "Signup"}
+      </button>
+      <Link href={"/login"} className="font-light">
+        Already have an account? <span className="font-medium">Login</span>
+      </Link>
+    </main>
   );
 };
 
